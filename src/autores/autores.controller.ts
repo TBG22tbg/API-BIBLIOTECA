@@ -1,17 +1,28 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, Get, ParseIntPipe, Param } from '@nestjs/common';
 import { CreateAutorDto } from './dto/create-autor.dto';
 import { AutoresService } from './autores.service';
 
 @Controller('autores')
 export class AutoresController {
-    // Injetamos o LivrosService com depêndencia para o controller acessar
+    // Injetamos o AutoresService com depêndencia para o controller acessar
     constructor (private readonly autoresService : AutoresService){}
 
-    // Define o
     @Post()
     criar(@Body() createAutorDto : CreateAutorDto){
-        // O @Body captura os dados enviados no corpo da requisição
-        // O DTO define como esses dados deverão ser validados.
         return this.autoresService.criar(createAutorDto);
     }
+
+    // Define o endpoint GET/livros
+        @Get()
+        listarAutores(){
+            return this.autoresService.listarAutores();
+        };
+    
+        // Define o endpoint GET/livros/:id
+        @Get(':id')
+        buscaIdAutor(
+            @Param('id', ParseIntPipe) id: number
+        ) {
+            return this.autoresService.buscaIdAutor(id);
+        }
 }

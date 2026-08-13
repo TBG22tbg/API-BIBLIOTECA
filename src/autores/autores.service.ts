@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { ResultSetHeader } from 'mysql2';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { DatabaseService } from 'src/database/database.service';
 import { CreateAutorDto } from './dto/create-autor.dto';
 
 @Injectable()
 export class AutoresService {
-    // Injetamos o DatabaseService dentro do LivrosService,
+    // Injetamos o DatabaseService dentro do AutoresService,
     //Assim não precisamos criar manualmente uma instância de outra classe
     constructor (private readonly databasService:DatabaseService){}
 
@@ -37,5 +37,29 @@ export class AutoresService {
                 ano_nascimento
             }
         };
+    }
+
+    // Função para ver todos os autores cadastrados no meu banco de dados
+     async listarAutores() {
+        // Irá selecionar todos os autores cadastrados na minha tabela 'autores'
+        const resultado = await this.databasService.query(
+            'SELECT * FROM autores'
+        );
+        return resultado;
+    }
+
+    //
+    async buscaIdAutor(id: number){
+        const resultado = await this.databasService.query(
+            'SELECT * FROM autores WHERE id = ?', [id]
+        ) as RowDataPacket[];
+        
+        // Se o autor informado não estiver cadastrado o sistema irá retorna com essa mensagem
+        if (resultado.length === 0) {
+            throw new NotFoundException(
+                'Autro não cadastrado em nosso banco de dados'
+            )
+        }
+        return resultado[0];
     }
 }
