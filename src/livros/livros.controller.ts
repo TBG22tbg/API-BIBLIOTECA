@@ -1,6 +1,7 @@
-import { Controller, Body, Post, Get, ParseIntPipe, Param } from '@nestjs/common';
+import { Controller, Body, Post, Get, Put, Delete, ParseIntPipe, Param} from '@nestjs/common';
 import { CreateLivroDto } from './dto/create-livro.dto';
 import { LivrosService } from './livros.service';
+import { updateLivroDto } from './dto/update-livro.dto';
 
 @Controller('livros')
 export class LivrosController {
@@ -27,5 +28,17 @@ export class LivrosController {
         @Param('id', ParseIntPipe) id: number
     ) {
         return this.livroService.buscaPorId(id);
+    }
+
+    // Define o endpoint PUT/livros/:id
+    @Put(':id')
+    atualizar(@Param('id') id: number, @Body() dados:updateLivroDto){
+        return this.livroService.atualizar(id, dados);
+    }
+
+    // Define o endpoint DELETE/livros/:id
+    @Delete(':id')
+    remover(@Param('id') id:number){
+        return this.livroService.remover(id);
     }
 }
