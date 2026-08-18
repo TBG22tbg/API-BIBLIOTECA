@@ -15,3 +15,10 @@ CREATE TABLE autores (
     nacionalidade VARCHAR(50) NOT NULL,
     ano_nascimento INT NOT NULL
 );
+
+CREATE TABLE usuario (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+);
