@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Biblioteca</title>
+
+    <!-- Conecta o arquivo CSS ao HTML -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+      <div class="container">
+        <h1>Biblioteca</h1>
+
+        <p>Sistema de gerenciamento de livros</p>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+      <!-- ============================= -->
+      <!-- CADASTRO DE LIVROS            -->
+      <!-- ============================= -->
+
+      <section class="card">
+        <div class="titulo-secao">
+          <div>
+            <h2>Cadastrar novo livro</h2>
+
+            <p>Preencha os dados abaixo para cadastrar um livro.</p>
+          </div>
+        </div>
+
+        <form id="form-livro">
+          <!-- TÍTULO -->
+          <div class="grupo-formulario">
+            <label for="titulo"> Título </label>
+
+            <input
+              type="text"
+              id="titulo"
+              name="titulo"
+              placeholder="Digite o título do livro"
+              required
+            />
+          </div>
+
+          <!-- AUTOR -->
+          <div class="grupo-formulario">
+            <label for="autor"> Autor </label>
+
+            <input
+              type="text"
+              id="autor"
+              name="autor"
+              placeholder="Digite o nome do autor"
+              required
+            />
+          </div>
+
+          <!-- ANO -->
+          <div class="grupo-formulario">
+            <label for="ano"> Ano </label>
+
+            <input
+              type="number"
+              id="ano"
+              name="ano"
+              placeholder="Ex: 2026"
+              required
+            />
+          </div>
+
+          <!-- DISPONIBILIDADE -->
+          <div class="grupo-formulario">
+            <label for="disponivel"> Disponível </label>
+
+            <select id="disponivel" name="disponivel" required>
+              <option value="">Selecione uma opção</option>
+
+              <option value="1">Sim</option>
+
+              <option value="0">Não</option>
+            </select>
+          </div>
+
+          <!-- BOTÃO -->
+          <div class="area-botao">
+            <button
+              type="submit"
+              class="botao botao-principal"
+              id="botao-salvar"
+            >
+              Cadastrar livro
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ============================= -->
+      <!-- ÁREA DE MENSAGENS             -->
+      <!-- ============================= -->
+
+      <div id="mensagem" class="mensagem"></div>
+
+      <!-- ============================= -->
+      <!-- LISTAGEM DOS LIVROS           -->
+      <!-- ============================= -->
+
+      <section class="card">
+        <div class="titulo-secao">
+          <div>
+            <h2>Livros cadastrados</h2>
+
+            <p>Confira os livros cadastrados no sistema.</p>
+          </div>
+
+          <button
+            type="button"
+            id="botao-atualizar"
+            class="botao botao-secundario"
+          >
+            Atualizar lista
+          </button>
+        </div>
+
+        <div class="tabela-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th>Título</th>
+
+                <th>Autor</th>
+
+                <th>Ano</th>
+
+                <th>Disponível</th>
+
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody id="lista-livros">
+              <!--
+              Os livros serão adicionados
+              aqui pelo JavaScript.
+            -->
+
+              <tr class="linha-vazia">
+                <td colspan="6">Nenhum livro carregado.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+      <p>Biblioteca • Integração Front-End + API</p>
+    </footer>
+
+    <!--
+    Conecta o JavaScript ao HTML.
+
+    Durante a aula, este arquivo será
+    responsável pela comunicação
+    com a nossa API NestJS.
+  -->
+    <script src="./script.js"></script>
+  </body>
+</html>
